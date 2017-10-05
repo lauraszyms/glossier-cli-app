@@ -28,6 +28,16 @@ class Glossier::CLI
     end
   end
 
+  def menu_reset
+    puts "Would you like to continue to explore? y or n."
+    input = gets.chomp
+      if input == "Y"
+       call
+      elsif input == "N"
+       goodbye
+      end
+   end
+
   def goodbye
     puts "Thanks for checking out Glossier - Skin first. Makeup second."
   end
@@ -35,20 +45,22 @@ class Glossier::CLI
   def list_skincare
     puts "1. Milky Jelly Cleanser"
     puts "2. Priming Moisturizer"
-    skincare_menu
+    catagory_menu
   end
 
   def list_makeup
     puts "1. Haloscope"
     puts "2. Boybrow"
+    catagory_menu
   end
 
   def list_body
     puts "1. Body Hero Wash"
     puts "2. Body Hero Lotion"
+    catagory_menu
   end
 
-  def skincare_menu
+  def catagory_menu(catagory_url)
     puts "Enter the number of the product you would like to explore, or type exit."
     input = nil
     while input != "exit"
@@ -62,14 +74,6 @@ class Glossier::CLI
     end
   end
 
-  def menu_reset
-    puts "Would you like to continue to explore? y or n."
-    input = gets.chomp
-      if input == "Y"
-       call
-      elsif input == "N"
-       goodbye
-      end
-   end
+
 
 end
