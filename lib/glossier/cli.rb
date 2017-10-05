@@ -32,4 +32,9 @@ class Glossier::CLI
     puts "Thanks for checking out Glossier - Skin first. Makeup second."
   end
 
+  def list_skincare
+    puts "1. Milky Jelly Cleanser"
+    puts "2. Priming Moisturizer"
+  end
+
 end
