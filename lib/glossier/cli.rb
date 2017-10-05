@@ -42,4 +42,9 @@ class Glossier::CLI
     puts "2. Boybrow"
   end
 
+  def list_body
+    puts "1. Body Hero Wash"
+    puts "2. Body Hero Lotion"
+  end
+
 end
