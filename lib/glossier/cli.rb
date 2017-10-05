@@ -37,4 +37,9 @@ class Glossier::CLI
     puts "2. Priming Moisturizer"
   end
 
+  def list_makeup
+    puts "1. Haloscope"
+    puts "2. Boybrow"
+  end
+
 end
