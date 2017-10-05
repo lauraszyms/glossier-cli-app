@@ -1,5 +1,7 @@
 class Glossier::CLI
 
-  puts "Glossier - A Beauty Brand Inspired by Real Life"
+  def call
+    puts "Glossier - A Beauty Brand Inspired by Real Life"
+  end
 
 end

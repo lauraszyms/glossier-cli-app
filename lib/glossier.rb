@@ -1,5 +1,2 @@
-require "glossier/version"
-
-module Glossier
-  # Your code goes here...
-end
+require_relative "glossier/version"
+require_relative "./glossier/cli"

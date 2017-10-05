@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require './lib/glossier'
 
 Glossier::CLI.new.call
