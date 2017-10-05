@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) {|glossier-cli-app| "https://github.com/#{glossier-cli-app}" }
 
-# Specify your gem's dependencies in glossier.gemspec
-gemspec
+
+gem 'pry'
+gem 'nokogiri', '1.6.6.2'
+gem 'rspec'
