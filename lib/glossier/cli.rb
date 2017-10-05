@@ -3,7 +3,7 @@ class Glossier::CLI
   def call
     puts "Glossier - A Beauty Brand Inspired by Real Life"
     list_catagories
-    menu
+    main_menu
     goodbye
   end
 
@@ -13,7 +13,7 @@ class Glossier::CLI
     puts "3. Body"
   end
 
-  def menu
+  def main_menu
     puts "Enter the number of the product catagory you would like to explore, or type exit"
     input = nil
     while input != "exit"
@@ -35,6 +35,7 @@ class Glossier::CLI
   def list_skincare
     puts "1. Milky Jelly Cleanser"
     puts "2. Priming Moisturizer"
+    skincare_menu
   end
 
   def list_makeup
@@ -45,6 +46,19 @@ class Glossier::CLI
   def list_body
     puts "1. Body Hero Wash"
     puts "2. Body Hero Lotion"
+  end
+
+  def skincare_menu
+    puts "Enter the number of the product you would like to explore, or type exit"
+    input = nil
+    while input != "exit"
+       input = gets.chomp
+      if input == "1"
+       puts "Product 1 info, price, url"
+      elsif input == "2"
+        puts "Product 1 info, price, url"
+      end
+    end
   end
 
 end
