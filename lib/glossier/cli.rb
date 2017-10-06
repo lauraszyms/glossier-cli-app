@@ -18,15 +18,17 @@ class Glossier::CLI
 
   def main_menu
     puts "Enter the number of the catagory you would like to explore, or type exit."
-    input = nil
-    while input != "exit"
-       input = gets.chomp.downcase
-      if input.to_i > 0
-       @catagory[input.to_i - 1].products.each_with_index do |product, index|
+    catagory_choice = nil
+    while catagory_choice != "exit"
+       catagory_choice = gets.chomp.downcase
+      if catagory_choice.to_i > 0
+       @catagory[catagory_choice.to_i - 1].products.each_with_index do |product, index|
          puts "#{index + 1}. #{product[:name]}"
        end
+       puts "Enter the number of the product you would like to explore, or type exit."
+       product_choice = gets.chomp
+       catagory_menu(catagory_choice.to_i, product_choice.to_i)
       end
-      catagory_menu
     end
   end
 
@@ -48,18 +50,11 @@ class Glossier::CLI
   end
 
 
-  def catagory_menu
-    puts "Enter the number of the product you would like to explore, or type exit."
-    input = nil
-    while input != "exit"
-      input = gets.chomp
-      if input == "1"
-       puts "Product 1 info, price, url"
-      elsif input == "2"
-        puts "Product 1 info, price, url"
-      end
-      menu_reset
-    end
+  def catagory_menu(catagory_choice, product_choice)
+    current_product = @catagory[catagory_choice - 1].products[product_choice - 1]
+      puts "#{current_product[:name]}"
+      puts "#{current_product[:description]}"
+    menu_reset
   end
 
 
