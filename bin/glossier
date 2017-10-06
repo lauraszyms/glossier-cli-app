@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+require "bundler/setup"
 require './lib/glossier'
+
 
 Glossier::CLI.new.call
