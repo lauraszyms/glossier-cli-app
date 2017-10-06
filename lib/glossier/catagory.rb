@@ -13,11 +13,13 @@ class Glossier::Catagory
     @products = []
   end
 
-  def self.products(user_catagory)
-    html = open('https://www.glossier.com/category/#{user_catagory}')
+  def self.product_list(user_catagory)
+    html = open("https://www.glossier.com/category/#{user_catagory}")
     doc = Nokogiri::HTML(html)
-    puts "skincare list#{(user_catagory)}"
-
+    @products = doc.css('.pro-list.container').text.strip.split("\"")
+    @products.each_with_index do |product, index|
+    puts "#{index + 1}. #{product}"
+   end
   end
 
   def add_product(product)
