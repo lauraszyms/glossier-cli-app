@@ -3,6 +3,11 @@ class Glossier::Catagory
   @@all
 
   def initialize
+    @products = []
+  end
+
+  def products
+    @products
   end
 
   def self.all

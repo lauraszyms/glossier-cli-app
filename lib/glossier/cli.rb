@@ -22,7 +22,7 @@ class Glossier::CLI
     while input != "exit"
        input = gets.chomp.downcase
       if input.to_i > 0
-       @catagory[input.to_i - 1]
+       @catagory[input.to_i - 1].products
       end
     end
   end
