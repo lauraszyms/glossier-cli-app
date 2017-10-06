@@ -22,7 +22,7 @@ class Glossier::CLI
        Glossier::Catagory.product_list(Glossier::Catagory.all[catagory_choice.to_i - 1])
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       catagory_menu
+       catagory_menu(product_choice)
       end
     end
   end
@@ -45,8 +45,10 @@ class Glossier::CLI
   end
 
 
-  def catagory_menu
-      puts "product info"
+  def catagory_menu(product_choice)
+    if product_choice.to_i > 0
+     Glossier::Catagory.product_attributes(Glossier::Catagory.products[product_choice.to_i - 1])
+   end
     menu_reset
   end
 

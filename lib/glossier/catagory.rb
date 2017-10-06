@@ -22,6 +22,9 @@ class Glossier::Catagory
    end
   end
 
+ def self.products
+   @products
+ end
 
   def self.all
     @@all
@@ -37,6 +40,12 @@ class Glossier::Catagory
       @@all << catagory
       puts "#{index + 1}. #{catagory.capitalize}"
    end
+  end
+
+  def self.product_attributes(user_product)
+    html = open('https://www.glossier.com/products/balm-dotcom')
+    doc = Nokogiri::HTML(html)
+    puts "Product Attributes#{user_product}"
   end
 
 
