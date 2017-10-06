@@ -10,10 +10,7 @@ class Glossier::CLI
   end
 
   def list_catagories
-    Glossier::Catagory.all.each_with_index do |catagory, index|
-      puts "#{index + 1}. #{catagory.name}"
-    end
-    @catagory = Glossier::Catagory.all
+    Glossier::Catagory.all
   end
 
   def main_menu
