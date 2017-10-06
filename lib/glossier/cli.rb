@@ -10,7 +10,7 @@ class Glossier::CLI
   end
 
   def list_catagories
-    Glossier::Catagory.all
+    Glossier::Catagory.list
   end
 
   def main_menu
@@ -19,12 +19,11 @@ class Glossier::CLI
     while catagory_choice != "exit"
        catagory_choice = gets.chomp.downcase
       if catagory_choice.to_i > 0
-       @catagory[catagory_choice.to_i - 1].products.each_with_index do |product, index|
-         puts "#{index + 1}. #{product[:name]}"
-       end
+       Glossier::Catagory.products(Glossier::Catagory.all[catagory_choice.to_i - 1])
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
        catagory_menu(catagory_choice.to_i, product_choice.to_i)
+       binding.pry
       end
     end
   end

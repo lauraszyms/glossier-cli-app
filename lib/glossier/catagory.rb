@@ -13,21 +13,29 @@ class Glossier::Catagory
     @products = []
   end
 
-  def products
-    @products
+  def self.products(user_catagory)
+    html = open('https://www.glossier.com/category/#{user_catagory}')
+    doc = Nokogiri::HTML(html)
+    puts "skincare list#{(user_catagory)}"
+
   end
 
   def add_product(product)
     @products << (product)
   end
 
-
   def self.all
+    @@all
+  end
+
+
+  def self.list
     html = open('https://www.glossier.com/')
     doc = Nokogiri::HTML(html)
     catagories = doc.css('.p-head-nav-el.mobile-nav-icon').text.gsub("\n", "").strip.split
     catagories.delete("Shop")
     catagories.each_with_index do |catagory, index|
+      @@all << catagory
       puts "#{index + 1}. #{catagory.capitalize}"
    end
   end
