@@ -8,16 +8,14 @@ class Glossier::CLI
   end
 
   def list_catagories
-    puts "1. Skincare"
-    puts "2. Makeup"
-    puts "3. Body"
+    @catagory = Glossier::Catagory.all
   end
 
   def main_menu
-    puts "Enter the number of the product catagory you would like to explore, or type exit."
+    puts "Enter the number of the catagory you would like to explore, or type exit."
     input = nil
     while input != "exit"
-       input = gets.chomp
+       input = gets.chomp.downcase
       if input == "1"
        list_skincare
       elsif input == "2"
@@ -29,11 +27,11 @@ class Glossier::CLI
   end
 
   def menu_reset
-    puts "Would you like to continue to explore? y or n."
-    input = gets.chomp
-      if input == "Y"
+    puts "Would you like to continue to explore, y or n?"
+    input = gets.chomp.downcase
+      if input == "y"
        call
-      elsif input == "N"
+      elsif input == "n"
        goodbye
       end
    end
@@ -60,7 +58,7 @@ class Glossier::CLI
     catagory_menu
   end
 
-  def catagory_menu(catagory_url)
+  def catagory_menu
     puts "Enter the number of the product you would like to explore, or type exit."
     input = nil
     while input != "exit"
