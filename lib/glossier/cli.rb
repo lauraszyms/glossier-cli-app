@@ -1,3 +1,5 @@
+require 'pry'
+
 class Glossier::CLI
 
   def call
@@ -8,6 +10,9 @@ class Glossier::CLI
   end
 
   def list_catagories
+    Glossier::Catagory.all.each_with_index do |catagory, index|
+      puts "#{index + 1}. #{catagory.name}"
+    end
     @catagory = Glossier::Catagory.all
   end
 
@@ -16,12 +21,8 @@ class Glossier::CLI
     input = nil
     while input != "exit"
        input = gets.chomp.downcase
-      if input == "1"
-       list_skincare
-      elsif input == "2"
-        list_makeup
-      elsif input == "3"
-        list_body
+      if input.to_i > 0
+       @catagory[input.to_i - 1]
       end
     end
   end
@@ -62,7 +63,7 @@ class Glossier::CLI
     puts "Enter the number of the product you would like to explore, or type exit."
     input = nil
     while input != "exit"
-       input = gets.chomp
+      input = gets.chomp
       if input == "1"
        puts "Product 1 info, price, url"
       elsif input == "2"
