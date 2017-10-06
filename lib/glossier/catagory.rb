@@ -1,8 +1,15 @@
+require 'open-uri'
+require 'pry'
+
+
 class Glossier::Catagory
  attr_accessor :name, :url, :products
-  @@all
 
-  def initialize
+   @@all = []
+
+  def initialize(name, url)
+    @name = name
+    @url = url
     @products = []
   end
 
@@ -13,6 +20,7 @@ class Glossier::Catagory
   def add_product(product)
     @products << (product)
   end
+
 
   def self.all
     catagory_1 = self.new
