@@ -23,7 +23,7 @@ class Glossier::CLI
        input = gets.chomp.downcase
       if input.to_i > 0
        @catagory[input.to_i - 1].products.each_with_index do |product, index|
-         puts "#{index + 1}. #{product}"
+         puts "#{index + 1}. #{product[:name]}"
        end
       end
       catagory_menu
@@ -33,34 +33,20 @@ class Glossier::CLI
   def menu_reset
     puts "Would you like to continue to explore, y or n?"
     input = gets.chomp.downcase
-      if input == "y"
+     while input != "exit"
+     if input == "y"
        call
-      elsif input == "n"
+     elsif input == "n"
        goodbye
+        end
       end
    end
 
   def goodbye
     puts "Thanks for checking out Glossier - Skin first. Makeup second."
+    exit
   end
 
-  def list_skincare
-    puts "1. Milky Jelly Cleanser"
-    puts "2. Priming Moisturizer"
-    catagory_menu
-  end
-
-  def list_makeup
-    puts "1. Haloscope"
-    puts "2. Boybrow"
-    catagory_menu
-  end
-
-  def list_body
-    puts "1. Body Hero Wash"
-    puts "2. Body Hero Lotion"
-    catagory_menu
-  end
 
   def catagory_menu
     puts "Enter the number of the product you would like to explore, or type exit."
