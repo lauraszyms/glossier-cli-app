@@ -10,6 +10,10 @@ class Glossier::Catagory
     @products
   end
 
+  def add_product(product)
+    @products << (product)
+  end
+
   def self.all
     catagory_1 = self.new
     catagory_1.name = "Skincare"
