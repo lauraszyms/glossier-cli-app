@@ -22,8 +22,11 @@ class Glossier::CLI
     while input != "exit"
        input = gets.chomp.downcase
       if input.to_i > 0
-       @catagory[input.to_i - 1].products
+       @catagory[input.to_i - 1].products.each_with_index do |product, index|
+         puts "#{index + 1}. #{product}"
+       end
       end
+      catagory_menu
     end
   end
 
