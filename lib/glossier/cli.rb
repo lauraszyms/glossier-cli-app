@@ -6,7 +6,6 @@ class Glossier::CLI
     puts "Glossier - A Beauty Brand Inspired by Real Life."
     list_catagories
     main_menu
-    goodbye
   end
 
   def list_catagories
@@ -19,10 +18,11 @@ class Glossier::CLI
     while catagory_choice != "exit"
        catagory_choice = gets.chomp.downcase
       if catagory_choice.to_i > 0
-       Glossier::Catagory.product_list(Glossier::Catagory.all[catagory_choice.to_i - 1])
+       user_catagory = Glossier::Catagory.all[catagory_choice.to_i - 1]
+       Glossier::Catagory.product_list(user_catagory)
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       catagory_menu(product_choice.to_i)
+       catagory_menu(user_catagory, product_choice.to_i)
       end
     end
   end
@@ -45,9 +45,9 @@ class Glossier::CLI
   end
 
 
-  def catagory_menu(product_choice)
+  def catagory_menu(user_catagory, product_choice)
     if product_choice > 0
-     Glossier::Catagory.product_attributes(Glossier::Catagory.products[product_choice - 1])
+     Glossier::Catagory.product_attributes(user_catagory.products[product_choice - 1])
    end
     menu_reset
   end

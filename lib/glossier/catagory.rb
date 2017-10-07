@@ -34,7 +34,7 @@ class Glossier::Catagory
     product_url.each { |url| catagory_name.products.each {|each_hash| each_hash[:url] = url } }
     catagory_name.products.each_with_index do |product_hash, index|
     puts "#{index + 1}. #{product_hash[:name]}"
-   end
+    end
   end
 
  def self.products
@@ -45,8 +45,8 @@ class Glossier::Catagory
     @@all
   end
 
-  def self.product_attributes(user_product)
-    html = open("https://www.glossier.com/products/#{user_product.gsub(" ", "-").downcase}")
+  def self.product_attributes(user_product_hash)
+    html = open("https://www.glossier.com#{user_product_hash[:url]}")
     doc = Nokogiri::HTML(html)
     product = {
       :name => doc.css('h1').text,
