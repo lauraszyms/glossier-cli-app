@@ -52,7 +52,7 @@ class Glossier::Catagory
       :name => doc.css('h1').text,
       :description => doc.css('.h-desc').search('p').text,
       :price => "price",
-      :url => "https://www.glossier.com/products/priming-moisturizer"
+      :url => "https://www.glossier.com#{user_product_hash[:url]}"
     }
     puts "#{product[:name]}"
     puts "#{product[:description]}"
