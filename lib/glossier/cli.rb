@@ -1,9 +1,16 @@
 require 'pry'
+require 'colorize'
 
 class Glossier::CLI
 
+  def run
+    puts "Glossier - A Beauty Brand Inspired by Real Life.".colorize(:light_magenta).underline
+    puts "Loading...".colorize(:blink => :white)
+    Glossier::Scraper.new.scrape_catagory_list
+    call
+  end
+
   def call
-    puts "Glossier - A Beauty Brand Inspired by Real Life."
     list_catagories
     main_menu
   end
@@ -19,10 +26,10 @@ class Glossier::CLI
        catagory_choice = gets.chomp.downcase
       if catagory_choice.to_i > 0
        user_catagory = Glossier::Catagory.all[catagory_choice.to_i - 1]
-       Glossier::Catagory.product_list(user_catagory)
+       Glossier::Scraper.scrape_product_url(user_catagory)
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       catagory_menu(user_catagory, product_choice.to_i)
+       Glossier::Product.product_list
       end
     end
   end

@@ -14,12 +14,20 @@ class Glossier::Catagory
     @@all << self
   end
 
-  def self.products
+
+  def products
     @products
   end
 
    def self.all
      @@all
+   end
+
+   def self.list
+     @@all.each_with_index do |catagory, index|
+       puts "#{index + 1}. #{catagory.name}"
+
+     end
    end
 
   # def self.list
