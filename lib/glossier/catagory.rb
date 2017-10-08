@@ -14,6 +14,9 @@ class Glossier::Catagory
     @@all << self
   end
 
+  def add_product(product)
+    @products << products
+  end
 
   def products
     @products

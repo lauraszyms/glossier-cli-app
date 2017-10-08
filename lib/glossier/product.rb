@@ -3,24 +3,29 @@ require 'pry'
 require 'nokogiri'
 
 class Glossier::Product
-  attr_accessor :name, :catagory, :description, :price, :url
+  attr_accessor :name, :description, :price, :url
 
   @@all = []
+
+  # def initialize(product_attributes)
+  #   @name = student_hash.values_at(:name).join
+  #   @catagory = student_hash.values_at(:catagory).join
+  #   @description = student_hash.values_at(:description).join
+  #   @price = student_hash.values_at(:price).join
+  #   @url = student_hash.values_at(:url).join
+  #   @@all << self
+  # end
 
   def initialize(attributes)
     attributes.each do |key, value|
       self.send("#{key}=", value)
-    @@all << self
+      @@all << self
     end
   end
 
-  def all
+  def self.all
     @@all
   end
 
-  def self.product_list(catagory)
-    @@all.each_with_index do |product, index|
-      puts "#{index + 1}. #{product[:name]}"
-  end
 
 end

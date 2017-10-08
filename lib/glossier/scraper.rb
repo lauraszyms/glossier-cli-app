@@ -20,34 +20,40 @@ class Glossier::Scraper
    end
   end
 
+  # def scrape_product_list(catagory)
+  #   html = open("#{catagory.url}")
+  #   doc = Nokogiri::HTML(html)
+  #   product_name = doc.css('.l-el-a').text.gsub("Learn more", "").gsub("$", "\"").gsub!(/\d+/,"").split("\"")
+  # end
 
-  def self.scrape_product_url(catagory)
+  def self.scrape_product_list(catagory)
     html = open("#{catagory.url}")
     doc = Nokogiri::HTML(html)
-    #product_name = doc.css('.l-el-a').text.gsub("Learn more", "").gsub("$", "\"").gsub!(/\d+/,"").split("\"")
-    product_url = doc.xpath('//div[@class="l-el-a"]/a').map { |link| link['href'] }
-    # product_name.each do |name|
-    product_url.each do |url|
-    scrape_product_attributes(catagory.name, catagory.url)
-    # puts "#{index + 1}. #{product_hash[:name]}"
+    name_list = doc.css('.l-el-a').text.gsub("Learn more", "").gsub("$", "\"").gsub!(/\d+/,"").split("\"")
+    name_list.each_with_index do |name, index|
+      puts "#{index + 1}. #{name}"
     end
   end
 
-  def self.scrape_product_attributes(catagory, product_url)
-    html = open("#{product_url}")
+
+  def self.scrape_product_url(catagory, product_choice)
+    html = open("#{catagory.url}")
+    doc = Nokogiri::HTML(html)
+    url_list = doc.xpath('//div[@class="l-el-a"]/a').map { |link| link['href'] }
+    self.scrape_product_attributes(url_list[product_choice])
+  end
+
+  def self.scrape_product_attributes(product_url)
+    html = open("https://www.glossier.com#{product_url}")
     doc = Nokogiri::HTML(html)
     product_attributes = {
       :name => doc.css('h1').text,
-      :catagory => catagory,
       :description => doc.css('.h-desc').search('p').text,
       :price => "price",
-      :url => "#{product_url}"
+      :url => "https://www.glossier.com#{product_url}"
     }
-    Glossier::Product.new(product_attributes)
-    # puts "#{product[:name]}"
-    # puts "#{product[:description]}"
-    # puts "#{product[:price]}"
-    # puts "#{product[:url]}"
+    product = Glossier::Product.new(product_attributes)
+    Glossier::Product(product)
   end
 
 

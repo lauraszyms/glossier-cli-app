@@ -26,12 +26,19 @@ class Glossier::CLI
        catagory_choice = gets.chomp.downcase
       if catagory_choice.to_i > 0
        user_catagory = Glossier::Catagory.all[catagory_choice.to_i - 1]
-       Glossier::Scraper.scrape_product_url(user_catagory)
+       Glossier::Scraper.scrape_product_list(user_catagory)
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       Glossier::Product.product_list
+       Glossier::Scraper.scrape_product_url(user_catagory, product_choice.to_i - 1)
       end
     end
+  end
+
+  def product_info(product)
+    puts "#{product.name}"
+    puts "#{product.definition}"
+    puts "#{product.price}"
+    puts "#{product.url}"
   end
 
   def menu_reset
@@ -52,12 +59,7 @@ class Glossier::CLI
   end
 
 
-  def catagory_menu(user_catagory, product_choice)
-    if product_choice > 0
-     Glossier::Catagory.product_attributes(user_catagory.products[product_choice - 1])
-   end
-    menu_reset
-  end
+
 
 
 
