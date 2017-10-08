@@ -10,17 +10,9 @@ class Glossier::Catagory
   def initialize(name, url)
     @name = name
     @url = url
-    @products = []
     @@all << self
   end
 
-  def add_product(product)
-    @products << products
-  end
-
-  def products
-    @products
-  end
 
    def self.all
      @@all
@@ -28,8 +20,7 @@ class Glossier::Catagory
 
    def self.list
      @@all.each_with_index do |catagory, index|
-       puts "#{index + 1}. #{catagory.name}"
-
+       puts "#{index + 1}. #{catagory.name.capitalize}"
      end
    end
 

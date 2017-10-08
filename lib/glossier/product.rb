@@ -16,15 +16,33 @@ class Glossier::Product
   #   @@all << self
   # end
 
-  def initialize(attributes)
-    attributes.each do |key, value|
-      self.send("#{key}=", value)
-      @@all << self
-    end
+  def initialize(name)
+    @name = name
+    @@all << self
   end
 
   def self.all
     @@all
+  end
+
+  def self.create(name)
+    new_instance = self.new(name)
+    @@all << new_instance
+    new_instance
+  end
+
+  def self.find_by_name(name)
+    all.detect { |a| a.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+
+  def add_attributes(attributes)
+    @description = attributes.values_at(:description).join
+    @price = attributes.values_at(:price).join
+    @url = attributes.values_at(:url).join
   end
 
 
