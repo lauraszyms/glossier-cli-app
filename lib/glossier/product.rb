@@ -14,8 +14,12 @@ class Glossier::Product
         @price = attributes_hash.values_at(:price).join
         @url = attributes_hash.values_at(:url).join
         add_to_catagory(self)
+        self.catagory.add_product(self)
+        add_to_all
+        add_to_catagory(self)
+        self.catagory.add_product(self)
+
         @@all << self
-        binding.pry
   end
 
   def self.all
@@ -27,10 +31,30 @@ class Glossier::Product
   end
 
   def add_to_catagory(product)
-    catagory_instance = Glossier::Catagory.find_or_create_by_name(product.catagory)
+    catagory_instance = Glossier::Catagory.find_by_name(product.catagory)
     product.catagory = catagory_instance
   end
-  #
+
+  def list_attributes
+    puts "#{self.name}"
+    puts "#{self.description}"
+    puts "#{self.price}"
+    puts "#{self.url}"
+  end
+
+  def add_to_all
+    if self.catagory != "all"
+      self.catagory = "all"
+    end
+  end
+
+  # def catagory_check
+  #   if self.catagory == " " || self.catagory == ""
+  #     self.catagory = "all"
+  #   end
+  # end
+
+    #
   # def self.create(attributes)
   #   new_instance = self.new(name)
   #   @@all << new_instance

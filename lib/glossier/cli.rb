@@ -28,20 +28,20 @@ class Glossier::CLI
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
        Glossier::Product.all[product_choice.to_i - 1].list_attributes
-       end
-      end
+      menu_reset
+     end
     end
   end
 
-  def self.product_info(product)
-    puts "#{product.name}".colorize(:light_magenta)
-    puts "#{product.description}"
-    puts "#{product.price}".colorize(:light_magenta)
-    puts "#{product.url}".colorize(:light_magenta)
-    self.menu_reset
-  end
+  # def self.product_info(product)
+  #   puts "#{product.name}".colorize(:light_magenta)
+  #   puts "#{product.description}"
+  #   puts "#{product.price}".colorize(:light_magenta)
+  #   puts "#{product.url}".colorize(:light_magenta)
+  #   self.menu_reset
+  # end
 
-  def self.menu_reset
+  def menu_reset
     puts "Would you like to continue to explore, y or n?"
     input = gets.chomp.downcase
      while input != "exit"
@@ -53,7 +53,7 @@ class Glossier::CLI
       end
    end
 
-  def self.goodbye
+  def goodbye
     puts "Thanks for checking out Glossier - Skin first. Makeup second.".colorize(:light_magenta)
     exit
   end

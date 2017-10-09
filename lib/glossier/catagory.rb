@@ -3,13 +3,12 @@ require 'pry'
 require 'nokogiri'
 
 class Glossier::Catagory
- attr_accessor :name, :url, :products
+ attr_accessor :name, :products
 
    @@all = []
 
-  def initialize(name, url)
+  def initialize(name)
     @name = name
-    @url = url
     @products = []
     @@all << self
   end
@@ -33,10 +32,16 @@ class Glossier::Catagory
      @products << product
    end
 
+   def self.find_by_name(name)
+     all.detect { |a| a.name == name }
+   end
+
    def self.create(name)
+     if self.find_by_name = nil
      new_instance = self.new(name)
      @@all << new_instance
      new_instance
+    end
    end
 
    def self.find_by_name(name)
@@ -47,8 +52,10 @@ class Glossier::Catagory
      self.find_by_name(name) || self.create(name)
    end
 
-   def self.list_products
-     @products
+   def list_products
+     @products.each_with_index do |product, index|
+       puts "#{index +1}. #{product.name}"
+     end
    end
 
   # def self.list

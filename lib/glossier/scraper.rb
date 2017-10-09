@@ -15,8 +15,7 @@ class Glossier::Scraper
     catagories = doc.css('.p-head-nav-el.mobile-nav-icon').text.gsub("\n", "").strip.split
     catagories.delete("Shop")
     catagories.each_with_index do |catagory, index|
-      catagory_url = "https://www.glossier.com/category/#{catagory}"
-      Glossier::Catagory.new(catagory, catagory_url)
+      Glossier::Catagory.new(catagory)
    end
   end
 
@@ -29,7 +28,7 @@ class Glossier::Scraper
   def scrape_product_urls
     html = open("https://www.glossier.com/products")
     doc = Nokogiri::HTML(html)
-    product_url = doc.xpath('//div[@class="l-el-a"]/a').map { |link| link['href'] }
+    product_url = doc.xpath('//div[@class="l-el-a"]/a').map { |link| link['href'] }.uniq
     product_url.each { |url| scrape_product_attributes(url) }
   end
 
