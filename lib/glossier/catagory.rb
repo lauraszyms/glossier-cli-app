@@ -47,6 +47,10 @@ class Glossier::Catagory
      self.find_by_name(name) || self.create(name)
    end
 
+   def self.list_products
+     @products
+   end
+
   # def self.list
   #   html = open('https://www.glossier.com/')
   #   doc = Nokogiri::HTML(html)

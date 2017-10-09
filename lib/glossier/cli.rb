@@ -5,10 +5,8 @@ class Glossier::CLI
 
   def run
     puts "Glossier - A Beauty Brand Inspired by Real Life.".colorize(:light_magenta)
-    # Glossier::Scraper.new.scrape_catagory_list
-    # call
     Glossier::Scraper.new.scrape_data
-    # call
+    call
   end
 
   def call
@@ -26,12 +24,10 @@ class Glossier::CLI
     while catagory_choice != "exit"
        catagory_choice = gets.chomp.downcase
       if catagory_choice.to_i > 0
-       user_catagory = Glossier::Catagory.all[catagory_choice.to_i - 1]
-       Glossier::Product.all.each_with_index do |product, index|
-         puts "#{index = 1}. #{product.name}"
+       Glossier::Catagory.all[catagory_choice.to_i - 1].list_products
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       Glossier::Scraper.scrape_product_url(user_catagory, product_choice.to_i - 1)
+       Glossier::Product.all[product_choice.to_i - 1].list_attributes
        end
       end
     end
