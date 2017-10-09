@@ -38,10 +38,10 @@ class Glossier::Product
   end
 
   def list_attributes
-    puts "#{self.name}"
+    puts "#{self.name}".colorize(:light_magenta)
     puts "#{self.description}"
-    puts "#{self.price}"
-    puts "#{self.url}"
+    puts "#{self.price}".colorize(:light_magenta)
+    puts "#{self.url}".colorize(:light_magenta)
   end
 
   def add_to_all
@@ -55,21 +55,6 @@ class Glossier::Product
       self.catagory = "all"
     end
   end
-
-    #
-  # def self.create(attributes)
-  #   new_instance = self.new(name)
-  #   @@all << new_instance
-  #   new_instance
-  # end
-  #
-  # def self.find_by_name(name)
-  #   all.detect { |a| a.name == name }
-  # end
-  #
-  # def self.find_or_create_by_name(name)
-  #   self.find_by_name(name) || self.create(name)
-  # end
 
 
 
