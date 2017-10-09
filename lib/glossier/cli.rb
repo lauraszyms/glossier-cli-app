@@ -27,19 +27,11 @@ class Glossier::CLI
        Glossier::Catagory.all[catagory_choice.to_i - 1].list_products
        puts "Enter the number of the product you would like to explore, or type exit."
        product_choice = gets.chomp
-       Glossier::Product.all[product_choice.to_i - 1].list_attributes
+       Glossier::Catagory.all[catagory_choice.to_i - 1].list_products[product_choice.to_i - 1].list_attributes
       menu_reset
      end
     end
   end
-
-  # def self.product_info(product)
-  #   puts "#{product.name}".colorize(:light_magenta)
-  #   puts "#{product.description}"
-  #   puts "#{product.price}".colorize(:light_magenta)
-  #   puts "#{product.url}".colorize(:light_magenta)
-  #   self.menu_reset
-  # end
 
   def menu_reset
     puts "Would you like to continue to explore, y or n?"

@@ -13,6 +13,7 @@ class Glossier::Product
         @description = attributes_hash.values_at(:description ).join
         @price = attributes_hash.values_at(:price).join
         @url = attributes_hash.values_at(:url).join
+        catagory_check
         add_to_catagory(self)
         self.catagory.add_product(self)
         add_to_all
@@ -20,6 +21,7 @@ class Glossier::Product
         self.catagory.add_product(self)
 
         @@all << self
+
   end
 
   def self.all
@@ -48,11 +50,11 @@ class Glossier::Product
     end
   end
 
-  # def catagory_check
-  #   if self.catagory == " " || self.catagory == ""
-  #     self.catagory = "all"
-  #   end
-  # end
+  def catagory_check
+    if self.catagory == " " || self.catagory == ""
+      self.catagory = "all"
+    end
+  end
 
     #
   # def self.create(attributes)
