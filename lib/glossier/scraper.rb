@@ -4,6 +4,13 @@ require 'nokogiri'
 
 class Glossier::Scraper
 
+  def scrape_intro
+    html = open('https://www.glossier.com/')
+    doc = Nokogiri::HTML(html)
+    intro = doc.css('.el-b').text
+    intro
+  end
+
   def scrape_data
     scrape_catagories
     scrape_product_urls

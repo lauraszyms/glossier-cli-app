@@ -5,6 +5,8 @@ class Glossier::CLI
 
   def run
     puts "Glossier - A Beauty Brand Inspired by Real Life.".colorize(:light_magenta)
+    puts "#{Glossier::Scraper.new.scrape_intro}"
+    puts "::Loading::".colorize(:color => :light_magenta).colorize(:blink => :white)
     Glossier::Scraper.new.scrape_data
     call
   end
