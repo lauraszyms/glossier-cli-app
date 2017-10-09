@@ -46,13 +46,12 @@ class Glossier::Scraper
     doc = Nokogiri::HTML(html)
     product_attributes = {
       :name => doc.css('h1').text,
-      :catagory => doc.css('.p-prod-breadcrumb-section').search('a').children.text.gsub("HomeProducts", ""),
+      :catagory => (doc.css('.p-prod-breadcrumb-section').search('a').children.text.gsub("HomeProducts", "")),
       :description => doc.css('.h-desc').search('p').text,
       :price => "price",
       :url => "https://www.glossier.com#{product_url}"
     }
     product = Glossier::Product.new(product_attributes)
-    binding.pry
   end
 
 

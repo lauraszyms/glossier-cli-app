@@ -7,24 +7,28 @@ class Glossier::Product
 
   @@all = []
 
-  # def initialize(product_attributes)
-  #   @name = student_hash.values_at(:name).join
-  #   @catagory = student_hash.values_at(:catagory).join
-  #   @description = student_hash.values_at(:description).join
-  #   @price = student_hash.values_at(:price).join
-  #   @url = student_hash.values_at(:url).join
-  #   @@all << self
-  # end
-
-  def initialize(attributes)
-      attributes.each do |key, value|
-        self.send("#{key}=", value)
+  def initialize(attributes_hash)
+        @name = attributes_hash.values_at(:name).join
+        @catagory = attributes_hash.values_at(:catagory).join
+        @description = attributes_hash.values_at(:description ).join
+        @price = attributes_hash.values_at(:price).join
+        @url = attributes_hash.values_at(:url).join
+        add_to_catagory(self)
         @@all << self
-    end
+        binding.pry
   end
 
   def self.all
     @@all
+  end
+
+  def clear
+    @@all.clear
+  end
+
+  def add_to_catagory(product)
+    catagory_instance = Glossier::Catagory.find_or_create_by_name(product.catagory)
+    product.catagory = catagory_instance
   end
   #
   # def self.create(attributes)

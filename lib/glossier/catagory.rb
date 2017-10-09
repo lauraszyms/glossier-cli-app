@@ -10,6 +10,7 @@ class Glossier::Catagory
   def initialize(name, url)
     @name = name
     @url = url
+    @products = []
     @@all << self
   end
 
@@ -18,10 +19,32 @@ class Glossier::Catagory
      @@all
    end
 
+   def clear
+     @@all.clear
+   end
+
    def self.list
      @@all.each_with_index do |catagory, index|
        puts "#{index + 1}. #{catagory.name.capitalize}"
      end
+   end
+
+   def add_product(product)
+     @products << product
+   end
+
+   def self.create(name)
+     new_instance = self.new(name)
+     @@all << new_instance
+     new_instance
+   end
+
+   def self.find_by_name(name)
+     all.detect { |a| a.name == name }
+   end
+
+   def self.find_or_create_by_name(name)
+     self.find_by_name(name) || self.create(name)
    end
 
   # def self.list
