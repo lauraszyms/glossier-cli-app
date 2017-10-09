@@ -1,6 +1,4 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
+
 
 class Glossier::Product
   attr_accessor :name, :catagory, :description, :price, :url
@@ -8,19 +6,19 @@ class Glossier::Product
   @@all = []
 
   def initialize(attributes_hash)
-        @name = attributes_hash.values_at(:name).join
-        @catagory = attributes_hash.values_at(:catagory).join
-        @description = attributes_hash.values_at(:description ).join
-        @price = attributes_hash.values_at(:price).join
-        @url = attributes_hash.values_at(:url).join
-        catagory_check
-        add_to_catagory(self)
-        self.catagory.add_product(self)
-        add_to_all
-        add_to_catagory(self)
-        self.catagory.add_product(self)
+    @name = attributes_hash.values_at(:name).join
+    @catagory = attributes_hash.values_at(:catagory).join
+    @description = attributes_hash.values_at(:description ).join
+    @price = attributes_hash.values_at(:price).join
+    @url = attributes_hash.values_at(:url).join
+    catagory_check
+    add_to_catagory(self)
+    self.catagory.add_product(self)
+    add_to_all
+    add_to_catagory(self)
+    self.catagory.add_product(self)
 
-        @@all << self
+    @@all << self
 
   end
 

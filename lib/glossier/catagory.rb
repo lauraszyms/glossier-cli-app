@@ -1,7 +1,3 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-
 class Glossier::Catagory
  attr_accessor :name, :products
 
