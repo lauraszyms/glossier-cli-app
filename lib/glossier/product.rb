@@ -40,7 +40,7 @@ class Glossier::Product
   def list_attributes
     puts "#{self.name}".colorize(:light_magenta)
     puts "#{self.description}"
-    puts "#{self.price}".colorize(:light_magenta)
+    puts "$#{self.price}".colorize(:light_magenta)
     puts "#{self.url}".colorize(:light_magenta)
   end
 

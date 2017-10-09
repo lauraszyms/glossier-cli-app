@@ -42,7 +42,7 @@ class Glossier::Scraper
       :name => doc.css('h1').text,
       :catagory => (doc.css('.p-prod-breadcrumb-section').search('a').children.text.gsub("HomeProducts", "")),
       :description =>  doc.css('.h-desc').search('p')[0].text,
-      :price => "price",
+      :price => doc.css('.p-wrp.js-mobile-nav-wrp.header-sticker.p-prod').children.first.attr('glo-track-product').split(", ")[2].gsub("'", ""),
       :url => "https://www.glossier.com#{product_url}"
     }
     product = Glossier::Product.new(product_attributes)
