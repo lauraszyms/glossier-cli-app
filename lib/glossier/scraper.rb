@@ -5,8 +5,8 @@ require 'nokogiri'
 class Glossier::Scraper
 
   def scrape_data
-    scrape_catagory_list
-    scrape_product_list
+    scrape_catagories
+    scrape_product_urls
   end
 
   def scrape_catagories
@@ -41,16 +41,18 @@ class Glossier::Scraper
   #   self.scrape_product_attributes(url_list[product_choice])
   # end
 
-  def self.scrape_product_attributes(product_url)
+  def scrape_product_attributes(product_url)
     html = open("https://www.glossier.com#{product_url}")
     doc = Nokogiri::HTML(html)
     product_attributes = {
       :name => doc.css('h1').text,
+      :catagory => doc.css('.p-prod-breadcrumb-section').search('a').children.text.gsub("HomeProducts", ""),
       :description => doc.css('.h-desc').search('p').text,
       :price => "price",
       :url => "https://www.glossier.com#{product_url}"
     }
-    product = Glossier::Product.find_or_create_by_name(product_attributes)
+    product = Glossier::Product.new(product_attributes)
+    binding.pry
   end
 
 
